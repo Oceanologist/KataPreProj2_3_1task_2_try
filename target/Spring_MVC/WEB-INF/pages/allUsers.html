@@ -1,0 +1,27 @@
+!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+<h1>Пользователи</h1>
+
+<div th:each="user : ${users}">
+    <p>
+        [<a th:href="@{/edit/{id}(id=${user.id})}">изменить пользователя</a>
+        <span th:text="${user.name} + ' ' + ${user.surname}"></span>]
+        <a th:href="@{/delete/{id}(id=${user.id})}">удалить</a>
+    </p>
+    <p>
+        ID: <span th:text="${user.id}"></span><br>
+        Имя: <span th:text="${user.name}"></span><br>
+        Фамилия: <span th:text="${user.surname}"></span><br>
+        Возраст: <span th:text="${user.age}"></span>
+    </p>
+    <hr>
+
+</div>
+
+</body>
+</html>
