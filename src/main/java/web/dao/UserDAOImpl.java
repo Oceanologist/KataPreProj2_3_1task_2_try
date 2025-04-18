@@ -45,6 +45,5 @@ public class UserDAOImpl implements UserDAO {
         String jpql = "SELECT u FROM User u";
         TypedQuery<User> query = manager.createQuery(jpql, User.class);
         return query.getResultList();
-
     }
 }

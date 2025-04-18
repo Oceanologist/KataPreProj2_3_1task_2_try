@@ -1,26 +1,75 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Список пользователей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .action-buttons a {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .add-btn {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 <h1>Пользователи</h1>
 
-<div th:each="user : ${users}">
-    <p>
-        [<a th:href="@{/edit/{id}(id=${user.id})}">изменить пользователя</a>
-        <span th:text="${user.name} + ' ' + ${user.surname}"></span>]
-        <a th:href="@{/delete/{id}(id=${user.id})}">удалить</a>
-    </p>
-    <p>
-        ID: <span th:text="${user.id}"></span><br>
-        Имя: <span th:text="${user.name}"></span><br>
-        Фамилия: <span th:text="${user.surname}"></span><br>
-        Возраст: <span th:text="${user.age}"></span>
-    </p>
-    <hr>
-
+<!-- Отладочная информация -->
+<div style="margin-top: 30px; color: #666; font-size: 0.9em;">
+    <h3>Отладочная информация:</h3>
+    <p>Количество пользователей: <span th:text="${users != null ? users.size() : 0}">0</span></p>
+    <p>Первые 3 пользователя (если есть):</p>
+    <ul>
+        <li th:each="user : ${users != null ? users.subList(0, Math.min(3, users.size())) : []}">
+            ID: <span th:text="${user.id}"></span>,
+            Имя: <span th:text="${user.name}"></span>,
+            Фамилия: <span th:text="${user.surname}"></span>,
+            Возраст: <span th:text="${user.age}"></span>
+        </li>
+    </ul>
 </div>
 
 </body>

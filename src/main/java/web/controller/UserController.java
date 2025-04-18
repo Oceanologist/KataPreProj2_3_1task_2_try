@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping
     public String viewAllUsers(Model model) {
         model.addAttribute("users", userService.viewAllUsers());
-        return "users/allUsers";
+        return "allUsers";
     }
 
     @GetMapping("/new")
