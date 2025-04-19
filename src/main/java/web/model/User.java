@@ -6,6 +6,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -16,6 +18,10 @@ public class User {
     private String surname;
     @Column(name = "age", nullable = false)
     private int age;
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

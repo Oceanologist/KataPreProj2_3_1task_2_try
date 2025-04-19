@@ -47,6 +47,7 @@
             <version>${spring.version}</version>
         </dependency>
 
+
         <!-- Для @Resource -->
         <dependency>
             <groupId>javax.annotation</groupId>

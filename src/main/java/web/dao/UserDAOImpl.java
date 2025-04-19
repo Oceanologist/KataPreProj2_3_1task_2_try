@@ -1,7 +1,6 @@
 package web.dao;
 
 
-
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -24,20 +23,13 @@ public class UserDAOImpl implements UserDAO {
         manager.persist(user);
     }
 
+
     @Override
-    public void delete(User user) {
-        manager.remove(user);
-    }
-
-
-    public void edit(User user, int userId) {
-        User existingUser = manager.find(User.class, userId);
-        if (existingUser == null) {
-            throw new IllegalArgumentException("User not found");
-        }
-        existingUser.setName(user.getName());
-        existingUser.setSurname(user.getSurname());
-        existingUser.setAge(user.getAge());
+    public void update(User user, int id) {
+        User newUser = manager.find(User.class, id);
+        newUser.setName(user.getName());
+        newUser.setSurname(user.getSurname());
+        newUser.setAge(user.getAge());
     }
 
     @Override
@@ -45,5 +37,16 @@ public class UserDAOImpl implements UserDAO {
         String jpql = "SELECT u FROM User u";
         TypedQuery<User> query = manager.createQuery(jpql, User.class);
         return query.getResultList();
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return manager.find(User.class, id);
+
+    }
+
+    @Override
+    public void delete(int id) {
+        manager.remove(findUserById(id));
     }
 }
