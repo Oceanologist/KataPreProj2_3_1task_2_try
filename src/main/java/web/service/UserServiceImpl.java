@@ -7,12 +7,14 @@ import web.dao.UserDAO;
 import web.model.User;
 
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
 
     @Autowired
@@ -32,20 +34,20 @@ public class UserServiceImpl implements UserService {
         userDAO.delete(id);
     }
 
+    @Transactional
     @Override
     public void update(User user, int id) {
-        userDAO.update(user,id);
+        userDAO.update(user, id);
 
     }
-
-
+    @Transactional(readOnly = true)
     @Override
     public User findById(int id) {
         return userDAO.findUserById(id);
 
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<User> viewAllUsers() {
         System.out.println("viewAllUsers method working");
